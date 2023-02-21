@@ -48,7 +48,8 @@ class Wpstorm_Shortener_Loader {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-		require_once WPSTORM_SHORTENER_CLASSES_PATH . 'wpstorm-shortener-settings.php';
+		require_once WPSTORM_SHORTENER_PATH . 'classes/wpstorm-shortener-settings.php';
+		require_once WPSTORM_SHORTENER_PATH . 'classes/wpstorm-shortener-routes.php';
 	}
 }
 

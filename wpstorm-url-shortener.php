@@ -74,8 +74,6 @@ class Wpstorm_Shortener {
 		define( 'WPSTORM_SHORTENER_BASE', plugin_basename( WPSTORM_SHORTENER_FILE ) );
 		define( 'WPSTORM_SHORTENER_SLUG', 'wpstorm_shortener_link_settings' );
 		define( 'WPSTORM_SHORTENER_SETTINGS_LINK', admin_url( 'admin.php?page=' . WPSTORM_SHORTENER_SLUG ) );
-		define( 'WPSTORM_SHORTENER_CLASSES_PATH', WPSTORM_SHORTENER_PATH . 'classes/' );
-		define( 'WPSTORM_SHORTENER_MODULES_PATH', WPSTORM_SHORTENER_PATH . 'modules/' );
 		define( 'WPSTORM_SHORTENER_URL', plugins_url( '/', WPSTORM_SHORTENER_FILE ) );
 		define( 'WPSTORM_SHORTENER_WEB_MAIN', 'https://wpstorm.ir/' );
 		define( 'WPSTORM_SHORTENER_WEB_MAIN_DOC', WPSTORM_SHORTENER_WEB_MAIN . 'url-shortener/' );
@@ -87,7 +85,7 @@ class Wpstorm_Shortener {
 	 * @return void
 	 */
 	public function wpstorm_url_shortener_loader() {
-		require WPSTORM_SHORTENER_CLASSES_PATH . 'wpstorm-shortener-loader.php';
+		require WPSTORM_SHORTENER_PATH . 'classes/wpstorm-shortener-loader.php';
 	}
 
 	/**
@@ -96,7 +94,7 @@ class Wpstorm_Shortener {
 	 * @return void
 	 */
 	public function activate_farazsms() {
-		require_once WPSTORM_SHORTENER_CLASSES_PATH . 'wpstorm-shortener-activator.php';
+		require_once WPSTORM_SHORTENER_PATH . 'classes/wpstorm-shortener-activator.php';
 		Wpstorm_Shortener_Activator::activate();
 	}
 

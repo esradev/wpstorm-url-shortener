@@ -48,10 +48,31 @@ class Wpstorm_Shortener_Settings {
 		add_action( 'admin_bar_menu', [ $this, 'admin_bar_menu' ], 60 );
 		add_filter( 'plugin_action_links_' . WPSTORM_SHORTENER_BASE, [ $this, 'settings_link' ] );
 		add_action( 'wp_dashboard_setup', [ $this, 'rss_meta_box' ] );
+		add_action( 'init', [ $this, 'core' ] );
+        add_action('template_redirect', [$this, 'redirect']);
 	}
 
+	public function core() {
+		require_once WPSTORM_SHORTENER_PATH . ' modules/core/wpstorm-shortener-core.php';
+	}
 
+    public function redirect() {
+        //TODO detect what url user try to GET and check if it is a $shortcode redirect it to $url
+	    $shortCode = $_GET["c"];
+	    try{
+		    // Get URL by short code
+		    $url = Wpstorm_Shortener_Core::shortCodeToUrl($shortCode);
 
+		    // Redirect to the original URL
+		    wp_redirect( $url, 301 );
+		    exit;
+
+	    }catch(Exception $e){
+		    // Display error
+		    echo $e->getMessage();
+	    }
+
+    }
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -59,6 +80,7 @@ class Wpstorm_Shortener_Settings {
 	 * @since 1.0.0
 	 */
 	public function admin_enqueue_styles() {
+        //TODO make plugin settings page with react and use rest routes
 		wp_enqueue_style( 'wpstorm-shortener-style', WPSTORM_SHORTENER_URL . 'build/index.css' );
 
 	}
@@ -88,8 +110,8 @@ class Wpstorm_Shortener_Settings {
 			'wpstorm-shortener-script',
 			'wpstormShortenerJsObject',
 			[
-				'rootapiurl'    => esc_url_raw( rest_url() ),
-				'nonce'         => wp_create_nonce( 'wp_rest' ),
+				'rootapiurl' => esc_url_raw( rest_url() ),
+				'nonce'      => wp_create_nonce( 'wp_rest' ),
 			]
 		);
 
@@ -123,7 +145,8 @@ class Wpstorm_Shortener_Settings {
 	 * @return void
 	 */
 	public function admin_page() {
-		include_once WPSTORM_SHORTENER_CLASSES_PATH . 'wpstorm-shortener-admin-page.php';
+		include_once WPSTORM_SHORTENER_PATH . 'classes/wpstorm-shortener-admin-page.php';
+
 	}
 
 	/**
@@ -198,7 +221,7 @@ class Wpstorm_Shortener_Settings {
 
 	public function rss_postbox_container() {
 		?>
-		<div class="wpstorm-shortener-rss-widget">
+        <div class="wpstorm-shortener-rss-widget">
 			<?php
 			wp_widget_rss_output(
 				'https://wpstorm.ir/feed/',
@@ -210,7 +233,7 @@ class Wpstorm_Shortener_Settings {
 				]
 			);
 			?>
-		</div>
+        </div>
 		<?php
 
 	}

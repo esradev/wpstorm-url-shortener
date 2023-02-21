@@ -12,7 +12,7 @@ class Wpstorm_Shortener_Activator
     {
         global $wpdb;
         $collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wpstorm_url_shortener';
+        $table_name = $wpdb->prefix . 'wpstorm_short_urls';
 
         $query = "CREATE TABLE IF NOT EXISTS `$table_name` (
 					 `id` int(11) NOT NULL AUTO_INCREMENT,
