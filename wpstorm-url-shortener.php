@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Wpstorm Url Shortener
- * Plugin URI: https://wpstorm.ir
+ * Plugin URI: https://wpstorm.ir/url-shortener
  * Description: Complete plugin for generate short links with your own custom domain.
  * Version: 1.0
  * Author: Wpstorm
